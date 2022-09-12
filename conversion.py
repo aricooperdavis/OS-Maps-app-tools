@@ -16,8 +16,8 @@ DB = args.file
 # Parse db
 in_db = sqlite3.connect(DB)
 in_cur = in_db.cursor()
-out_db = sqlite3.connect(DB)
-out_cur = out_db.cursor(DB[:-8]+'_webp.mbtiles')
+out_db = sqlite3.connect(DB[:-8]+'_webp.mbtiles')
+out_cur = out_db.cursor()
 
 # Set MBTiles magic number
 # https://www.sqlite.org/src/artifact?ci=trunk&filename=magic.txt
