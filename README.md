@@ -8,7 +8,7 @@ Extracting and converting maps from the OS Maps app.
 * This allows you to use the digital OS Maps that you've bought with other mapping apps.
 
 ## :warning:Disclaimer
-This repository contains no intellectual property belonging to Ordnance Survey. The tools and techniques described should only be used in accordance with the Ordance Survey terms of use and UK law. Be aware that these terms of service may explicitly prohibit the extraction of maps from the app. 
+The tools and techniques described here should only be used in accordance with the Ordance Survey terms of use and UK law. Be aware that these terms of service may explicitly prohibit the extraction of maps from the app. Don't do anything illegal with the knowledge you learn here; if you do that's entirely your fault.
 
 Please don't share any OS Maps - purchasing their excellent maps funds the work put into making them.
 
@@ -28,11 +28,18 @@ Directions for extracting the maps downloaded in the OS Maps app to individual M
 Each region downloaded in the OS Maps app will be extracted into its own `.mbtiles` file.
 
 ### Converting maps
-Directions for converting the tiles within the extracted maps to webp format for more space efficient storage. This can be a _lossy_ process so you may want to tweak the [hardcoded](https://github.com/aricooperdavis/OS-Maps-app-tools/blob/main/conversion.py#L42) [compression parameters](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#webp) to your quality/size preferences.
+Directions for converting the tiles within the extracted maps to webp format for more space efficient storage.
 
 1. Run `conversion.py $filename`
 
 A new file, `$filename_webp.mbtiles`, will be created in which the tile image format is webp.
+
+This is by default a _lossy_ process so you may want to tweak the [hardcoded](https://github.com/aricooperdavis/OS-Maps-app-tools/blob/main/conversion.py#L42) [compression parameters](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#webp) to your quality/size preferences. This is an illustration of the default compression parameters:
+
+| Original | Compressed |
+| :---: | :---: |
+| 26,912 bytes | 13,166 bytes |
+| ![original tile](./resources/original.png) | ![compressed tile](./resources/webp50.png) |
 
 ## Example usage
 A simple example of extracting and converting a map from the OS Maps app database. Note the difference in file size once the map tiles are converted from `png` to `webp` formats.
