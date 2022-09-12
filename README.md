@@ -15,6 +15,9 @@ Please don't share any OS Maps - purchasing their excellent maps funds the work 
 ## Directions for use
 _You'll need a rooted device to extract maps from the OS App. If you don't have a physical rooted device then you can use the emulator built into the Android Studio SDK with a rooted virtual device._
 
+### Requirements
+You'll need to install [Pillow](https://pillow.readthedocs.io/en/stable/installation.html) and [requests](https://requests.readthedocs.io/en/latest/user/install/#install). You should be able to use the `requirements.txt` file for this; i.e. `pip install -r ./requirements.txt`.
+
 ### Extracting maps
 Directions for extracting the maps downloaded in the OS Maps app to individual MBTiles files
 
