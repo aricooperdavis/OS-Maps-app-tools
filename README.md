@@ -43,7 +43,7 @@ This is by default a _lossy_ process so you may want to tweak the [hardcoded](ht
 | Original | Compressed |
 | :---: | :---: |
 | 26,912 bytes | 13,166 bytes |
-| ![original tile](./resources/original.png) | ![compressed tile](./resources/webp50.png) |
+| ![original tile](./resources/original.png) | ![compressed tile](./resources/webp50.webp) |
 
 ## Example usage
 A simple example of extracting and converting a map from the OS Maps app database. Note the difference in file size once the map tiles are converted from `png` to `webp` formats.
