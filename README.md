@@ -1,13 +1,17 @@
 # OS Maps app tools
 Extracting and converting maps from the OS Maps app.
 
+| ![Free the maps you've bought from the OS Maps app](./resources/screenshot.jpg) |
+| :---: |
+| Free the maps you've bought from the OS Maps app |
+
 ## Summary
 * Paper Ordnance Survey maps come with a code that allow you to add the maps you've bought to your OS Account.
 * In the [OS Maps app](https://shop.ordnancesurvey.co.uk/apps/os-maps-subscriptions/#app) you can download the maps in your account without the need for a subscription.
 * This repository contains tools that facilitate extracting maps from the OS Maps app in MBTiles format and converting the tiles from the default `.png` to the more space efficient `.webp`.
-* This allows you to use the digital OS Maps that you've bought with other mapping apps.
+* This allows you to use the digital OS Maps that you've bought with other mapping apps (such as [AlpineQuest](https://alpinequest.net/en/help/v2/maps/file-based-select), [Backcountry Navigator](https://www.backcountrynavigator.com/backcountry-navigator-pro), [Cartograph Maps](https://www.cartograph.eu/v3/), [Locus Map](https://www.locusmap.app/), [etc.](https://www.cumbriasoaringclub.co.uk/kb/osm.php#apps)).
 
-## :warning:Disclaimer
+## :warning: Disclaimer
 The tools and techniques described here should only be used in accordance with the Ordance Survey terms of use and UK law. Be aware that these terms of service may explicitly prohibit the extraction of maps from the app. Don't do anything illegal with the knowledge you learn here; if you do that's entirely your fault.
 
 Please don't share any OS Maps - purchasing their excellent maps funds the work put into making them.
@@ -51,12 +55,9 @@ A simple example of extracting and converting a map from the OS Maps app databas
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----        12/09/2022     14:55                .github
--a----        12/09/2022     14:55           1235 LICENSE
--a----        12/09/2022     14:55           2347 README.md
--a----        12/09/2022     15:00           1679 conversion.py
--a----        12/09/2022     14:55           2351 extraction.py
--a----        09/06/2022     14:45     1069801472 mbgl-offline.db
+-a----        00/00/0000     00:00           1679 conversion.py
+-a----        00/00/0000     00:00           2351 extraction.py
+-a----        00/00/0000     00:00     1069801472 mbgl-offline.db
 
 > python .\extraction.py
 > python .\conversion.py '.\Explorer OL44.mbtiles'
@@ -66,12 +67,9 @@ d-----        12/09/2022     14:55                .github
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----        12/09/2022     14:55                .github
--a----        12/09/2022     14:55           1235 LICENSE
--a----        12/09/2022     14:55           2347 README.md
--a----        12/09/2022     15:00           1679 conversion.py
--a----        12/09/2022     14:55           2351 extraction.py
--a----        09/06/2022     14:45     1069801472 mbgl-offline.db
--a----        12/09/2022     15:00       72069120 Explorer OL44.mbtiles
--a----        12/09/2022     15:02       50507776 Explorer OL44_webp.mbtiles
+-a----        00/00/0000     00:00           1679 conversion.py
+-a----        00/00/0000     00:00           2351 extraction.py
+-a----        00/00/0000     00:00     1069801472 mbgl-offline.db
+-a----        00/00/0000     00:00       72069120 Explorer OL44.mbtiles
+-a----        00/00/0000     00:00       50507776 Explorer OL44_webp.mbtiles
 ```
