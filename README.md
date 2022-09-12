@@ -19,7 +19,7 @@ _You'll need a rooted device to extract maps from the OS App. If you don't have 
 You'll need to install [Pillow](https://pillow.readthedocs.io/en/stable/installation.html) and [requests](https://requests.readthedocs.io/en/latest/user/install/#install). You should be able to use the `requirements.txt` file for this; i.e. `pip install -r ./requirements.txt`.
 
 ### Extracting maps
-Directions for extracting the maps downloaded in the OS Maps app to individual MBTiles files
+Directions for extracting the maps downloaded in the OS Maps app to individual MBTiles files:
 
 1. Within the OS Maps app, [download the maps](https://osmaps.com/os-maps-help?categoryId=631349&article=637593#article-id-637593) that you want to extract
 1. Copy `/data/data/uk.co.ordnancesurvey.osmaps/files/mbgl-offline.db` to your computer
