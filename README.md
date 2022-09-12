@@ -30,3 +30,38 @@ Directions for converting the tiles within the extracted maps to webp format for
 1. Run `conversion.py $filename`
 
 A new file, `$filename_webp.mbtiles`, will be created in which the tile image format is webp.
+
+## Example usage
+A simple example of extracting and converting a map from the OS Maps app database. Note the difference in file size once the map tiles are converted from `png` to `webp` formats.
+
+```powershell
+> ls
+
+    Directory: .\OS-Maps-app-tools
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        12/09/2022     14:55                .github
+-a----        12/09/2022     14:55           1235 LICENSE
+-a----        12/09/2022     14:55           2347 README.md
+-a----        12/09/2022     15:00           1679 conversion.py
+-a----        12/09/2022     14:55           2351 extraction.py
+-a----        09/06/2022     14:45     1069801472 mbgl-offline.db
+
+> python .\extraction.py
+> python .\conversion.py '.\Explorer OL44.mbtiles'
+> ls
+
+    Directory: .\OS-Maps-app-tools
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        12/09/2022     14:55                .github
+-a----        12/09/2022     14:55           1235 LICENSE
+-a----        12/09/2022     14:55           2347 README.md
+-a----        12/09/2022     15:00           1679 conversion.py
+-a----        12/09/2022     14:55           2351 extraction.py
+-a----        09/06/2022     14:45     1069801472 mbgl-offline.db
+-a----        12/09/2022     15:00       72069120 Explorer OL44.mbtiles
+-a----        12/09/2022     15:02       50507776 Explorer OL44_webp.mbtiles
+```
