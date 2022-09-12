@@ -22,7 +22,11 @@ Directions for extracting the maps downloaded in the OS Maps app to individual M
 1. Copy `/data/data/uk.co.ordnancesurvey.osmaps/files/mbgl-offline.db` to your computer
 1. Run `extraction.py`
 
+Each region downloaded in the OS Maps app will be extracted into its own `.mbtiles` file.
+
 ### Converting maps
 Directions for converting the tiles within the extracted maps to webp format for more space efficient storage. This can be a _lossy_ process so you may want to tweak the [hardcoded](https://github.com/aricooperdavis/OS-Maps-app-tools/blob/main/conversion.py#L42) [compression parameters](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#webp) to your quality/size preferences.
 
 1. Run `conversion.py $filename`
+
+A new file, `$filename_webp.mbtiles`, will be created in which the tile image format is webp.
