@@ -30,8 +30,8 @@ subparsers = parser.add_subparsers(required=True, dest='command', metavar='comma
 
 extract_parser = subparsers.add_parser('extract', help='Extract maps from mbgl-offline.db')
 extract_parser.add_argument('-file', type=str, default='./mbgl-offline.db', help='path to OS Maps database (default: \'%(default)s\')')
-extract_parser.add_argument('-regions', nargs='*', type=str, help='only extract REGIONS')
-extract_parser.add_argument('-zoom', type=int, default=16, help='tile zoom level (default: %(default)s)')
+extract_parser.add_argument('-regions', nargs='*', type=str, help='regions to extract from the database')
+extract_parser.add_argument('-zoom', type=int, default=16, help='MBTiles tile zoom level (default: %(default)s)')
 
 if not no_conversion:
     convert_parser = subparsers.add_parser('convert', help='Convert MBTiles files from png to webp')
