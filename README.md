@@ -57,8 +57,8 @@ optional arguments:
   -h, --help            show this help message and exit
   -file FILE            path to OS Maps database (default: './mbgl-offline.db')
   -regions [REGIONS [REGIONS ...]]
-                        only extract REGIONS
-  -zoom ZOOM            tile zoom level (default: 16)
+                        regions to extract from the database
+  -zoom ZOOM            MBTiles tile zoom level (default: 16)
 ```
 
 ### Converting maps (`convert`)
