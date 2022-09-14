@@ -37,7 +37,7 @@ optional arguments:
 ```
 
 ### Requirements
-You should not need to install additional packages to `extract`, but the `convert` command requires [Pillow](https://pillow.readthedocs.io/en/stable/installation.html) and other undocumented commands require [requests](https://requests.readthedocs.io/en/latest/user/install/#install). You should be able to use the `requirements.txt` file to install these; i.e. `pip install -r ./requirements.txt`.
+You should not need to install additional packages to `extract` or `dedupe`, but the `convert` command requires [Pillow](https://pillow.readthedocs.io/en/stable/installation.html) and other undocumented commands require [requests](https://requests.readthedocs.io/en/latest/user/install/#install). You should be able to use the `requirements.txt` file to install these; i.e. `pip install -r ./requirements.txt`.
 
 ### Extracting maps (`extract`)
 _You'll need a rooted android device to `extract`. If you don't have a rooted physical device then you can use the emulator built into the Android Studio SDK with a rooted virtual device._
@@ -90,7 +90,7 @@ Reference the [Pillow documentation](https://pillow.readthedocs.io/en/stable/han
 | 26,912 bytes | 23,668 bytes | 16,726 bytes | 14,476 bytes | 8,820 bytes | 2,362 bytes |
 | ![original tile](./resources/original.png) | ![compressed tile](./resources/100.webp) | ![compressed tile](./resources/75.webp) | ![compressed tile](./resources/50.webp) | ![compressed tile](./resources/25.webp) | ![compressed tile](./resources/0.webp) |
 
-### Deduping tiles ('dedupe')
+### Deduping tiles (`dedupe`)
 Adjacent OS maps overlap at the edges, but when using digital maps there is no need for this overlap, so storing these duplicated tiles is just a waste of space. As such the `dedupe` command allows you to remove tiles from one MBTiles file that appear in another.
 
 Note that these tiles are removed from the MBTiles file passed as the _first_ argument, and that this removal is performed _in place_.
@@ -112,7 +112,7 @@ optional arguments:
 ```
 
 ### Other commands
-Other undocumented commands are unsupported and should not be used.
+Other commands are unsupported and should not be used.
 
 ## Example usage
 A simple example of extracting, converting, and deduping two maps from the OS Maps app database:
