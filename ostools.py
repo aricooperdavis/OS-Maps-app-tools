@@ -215,14 +215,13 @@ def dedupe(file1, file2, verbose):
     if verbose: print(f'Removing tiles from \'{file1}\' that appear in \'{file2}\': ', end='', flush=True)
     dd_cur.execute('''DELETE FROM main.tiles
         WHERE main.tiles.ROWID IN (
-        SELECT main.tiles.ROWID FROM main.tiles
-        INNER JOIN cp_db.tiles
-        ON (
-            main.tiles.tile_column = cp_db.tiles.tile_column
-            AND main.tiles.tile_row = cp_db.tiles.tile_row
-            AND main.tiles.zoom_level = cp_db.tiles.zoom_level
-        )
-    )''')
+            SELECT main.tiles.ROWID FROM main.tiles
+            INNER JOIN cp_db.tiles ON (
+                main.tiles.tile_column = cp_db.tiles.tile_column
+                AND main.tiles.tile_row = cp_db.tiles.tile_row
+                AND main.tiles.zoom_level = cp_db.tiles.zoom_level
+            )
+        )''')
 
     dupes = dd_cur.rowcount
     if verbose: print(f'{dupes} duplicates')
