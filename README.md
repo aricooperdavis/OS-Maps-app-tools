@@ -40,7 +40,7 @@ optional arguments:
 You should not need to install additional packages to `extract` or `dedupe`, but the `convert` command requires [Pillow](https://pillow.readthedocs.io/en/stable/installation.html) and other undocumented commands require [requests](https://requests.readthedocs.io/en/latest/user/install/#install). You should be able to use the `requirements.txt` file to install these; i.e. `pip install -r ./requirements.txt`.
 
 ### Extracting maps (`extract`)
-_You'll need a rooted android device to `extract`. If you don't have a rooted physical device then you can use the emulator built into the Android Studio SDK with a rooted virtual device._
+_You'll need a rooted android device to `extract`. If you don't have a rooted physical device then you can use the [emulator built into the Android Studio SDK](https://developer.android.com/studio/run/managing-avds) with a [system image that supports elevated privileges](https://developer.android.com/studio/run/managing-avds#system-image)._
 
 1. Within the OS Maps app, [download the maps](https://osmaps.com/os-maps-help?categoryId=631349&article=637593#article-id-637593) that you want to extract
 1. Copy `/data/data/uk.co.ordnancesurvey.osmaps/files/mbgl-offline.db` from the android device to your computer. You can do this using ADB: `adb shell "su -c cat /data/data/uk.co.ordnancesurvey.osmaps/files/mbgl-offline.db" > ./mbgl-offline.db`
