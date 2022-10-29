@@ -43,7 +43,15 @@ You should not need to install additional packages to `extract` or `dedupe`, but
 _You'll need a rooted android device to `extract`. If you don't have a rooted physical device then you can use the [emulator built into the Android Studio SDK](https://developer.android.com/studio/run/managing-avds) with a [system image that supports elevated privileges](https://developer.android.com/studio/run/managing-avds#system-image)._
 
 1. Within the OS Maps app, [download the maps](https://osmaps.com/os-maps-help?categoryId=631349&article=637593#article-id-637593) that you want to extract
-1. Copy `/data/data/uk.co.ordnancesurvey.osmaps/files/mbgl-offline.db` from the android device to your computer. You can do this using ADB: `adb shell "su -c cat /data/data/uk.co.ordnancesurvey.osmaps/files/mbgl-offline.db" > ./mbgl-offline.db`
+1. Copy `/data/data/uk.co.ordnancesurvey.osmaps/files/mbgl-offline.db` from the android device to your computer. You can do this using ADB via your terminal:
+    ```powershell
+    adb shell
+    su
+    cp -R /data/data/uk.co.ordnancesurvey.osmaps/files/mbgl-offline.db /sdcard/
+    exit
+    exit
+    adb pull /sdcard/mbgl-offline.db
+    ```
 1. Run `python ostools.py extract`
 
 Each region downloaded in the OS Maps app will be extracted into its own `.mbtiles` file.
