@@ -293,4 +293,4 @@ if __name__ == '__main__':
         dedupe(ARGS.file1, ARGS.file2, ARGS.verbose)
     elif ARGS.command == 'update':
         if input('This scrapes tiles from OS Servers, which is antisocial, slow, and probably prohibited. Are you sure you want to continue? (Y/N): ').strip().upper() == 'Y':
-            update(ARGS.file, ARGS.container, ARGS.delay, ARGS.verbose)
+            update(ARGS.file, ARGS.delay, ARGS.container, ARGS.verbose)
