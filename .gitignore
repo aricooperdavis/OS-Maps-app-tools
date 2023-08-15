@@ -1,0 +1,6 @@
+venv/
+uk.co.ordnancesurvey.osmaps/
+*.tar.gz
+*.db
+*.mbtiles
+*-journal

@@ -36,8 +36,9 @@ def parse_args(no_conversion, no_update):
     parser.add_argument('-verbose', action='store_true', help='run in verbose mode')
     subparsers = parser.add_subparsers(required=True, dest='command', metavar='command')
 
-    extract_parser = subparsers.add_parser('extract', help='Extract maps from mbgl-offline.db')
-    extract_parser.add_argument('-file', default='./mbgl-offline.db', help='path to OS Maps database (default: \'%(default)s\')')
+    extract_parser = subparsers.add_parser('extract', help='Extract maps from map_data.db and customOfflineMaps.db files')
+    extract_parser.add_argument('-tiledb', default='./map_data.db', help='path to tile database (default: \'%(default)s\')')
+    extract_parser.add_argument('-infodb', default='./customOfflineMaps.db', help='path to info database (default: \'%(default)s\')')
     extract_parser.add_argument('-regions', nargs='*', help='regions to extract from the database')
     extract_parser.add_argument('-zoom', type=int, default=16, help='MBTiles tile zoom level (default: %(default)s)')
 
@@ -53,7 +54,7 @@ def parse_args(no_conversion, no_update):
     if not no_update:
         update_parser = subparsers.add_parser('update')
         update_parser.add_argument('file', help='path to MBTiles file')
-        update_parser.add_argument('-container', type=str, default='2021-12', help='update container (default: \'%(default)s)\'')
+        update_parser.add_argument('-container', type=str, default='2023-06', help='update container (default: \'%(default)s)\'')
         update_parser.add_argument('-delay', type=float, default=1.0, help='seconds delay between tile-server requests (default: %(default)s)')
 
     return parser.parse_args()
@@ -65,28 +66,38 @@ def flip_y(y, z=16):
     """
     return math.floor((2**z)-y-1)
 
-def extract(file, rois, zoom, verbose):
+def extract(tiledb, infodb, rois, zoom, verbose):
     """
-    Extract maps in MBTiles format from an OS Maps app mbgl-offline.db database.
+    Extract maps in MBTiles format from a map_data.db file and label it using data from a customOfflineMaps.db file.
     """
 
     # Parse db
-    if verbose: print(f'Loading OS Maps database \'{file}\': ', end='', flush=True)
-    in_db = sqlite3.connect(file)
+    if verbose: print(f'Loading \'{infodb}\': ', end='', flush=True)
+    in_db = sqlite3.connect(infodb)
     in_cur = in_db.cursor()
     if verbose: print('Done')
 
     if verbose: print('Identifying regions: ', end='', flush=True)
     regions = {}
-    for [r_id, r_df, r_ds] in in_cur.execute('SELECT * FROM regions WHERE description IS NOT NULL'):
+    for [r_id, r_mn, r_ln, r_ls, r_le, r_lw, r_zn, r_zx] in in_cur.execute('SELECT correlated_id, map_name, latitude_north, latitude_south, longitude_east, longitude_west, zoom_min, zoom_max FROM offline_maps WHERE map_name IS NOT NULL'):
         regions[r_id] = {
-            'FNAME': r_ds.decode('utf-8').split('-')[0].strip(),
-            'NAME': r_ds.decode('utf-8'),
-            'BOUNDS': ','.join(map(str, [json.loads(r_df)['bounds'][i] for i in [1,0,3,2]])),
-            'MINZOOM': str(math.floor(json.loads(r_df)['min_zoom'])),
-            'MAXZOOM': str(math.floor(json.loads(r_df)['max_zoom'])),
+            'FNAME': r_mn.split('-')[0].strip(),
+            'NAME': r_mn,
+            'BOUNDS': ','.join(map(str,[r_lw, r_ls, r_le, r_ln])),
+            'MINZOOM': str(math.floor(r_zn)),
+            'MAXZOOM': str(math.floor(r_zx)),
         }
     if verbose: print(', '.join([region["FNAME"] for _, region in regions.items()]))
+
+    if verbose: print(f'Closing \'{infodb}\': ', end='', flush=True)
+    in_db.commit()
+    in_db.close()
+    if verbose: print('Done')
+
+    if verbose: print(f'Loading \'{tiledb}\': ', end='', flush=True)
+    in_db = sqlite3.connect(tiledb)
+    in_cur = in_db.cursor()
+    if verbose: print('Done')
 
     for r_id, region in regions.items():
         # Only process regions specified
@@ -147,8 +158,10 @@ def extract(file, rois, zoom, verbose):
         if verbose: print('Done')
 
         # Close db
+        if verbose: print(f'Closing \'{region["FNAME"]}.mbtiles\': ', end='', flush=True)
         out_db.commit()
         out_db.close()
+        if verbose: print('Done')
 
     in_db.commit()
     in_db.close()
@@ -191,10 +204,15 @@ def convert(file, quality, verbose):
     if verbose: print('Done')
 
     # Close DBs
+    if verbose: print(f'Closing \'{file}.mbtiles\': ', end='', flush=True)
     in_db.commit()
     in_db.close()
+    if verbose: print('Done')
+    # Close db
+    if verbose: print(f'Closing \'{file[:-8]}_webp.mbtiles\': ', end='', flush=True)
     out_db.commit()
     out_db.close()
+    if verbose: print('Done')
     if verbose: print('Convert completed.')
     return True
 
@@ -286,7 +304,7 @@ def update(file, delay, container, verbose):
 if __name__ == '__main__':
     ARGS = parse_args(NO_CONVERSION, NO_UPDATE)
     if ARGS.command == 'extract':
-        extract(ARGS.file, ARGS.regions, ARGS.zoom, ARGS.verbose)
+        extract(ARGS.tiledb, ARGS.infodb, ARGS.regions, ARGS.zoom, ARGS.verbose)
     elif ARGS.command == 'convert':
         convert(ARGS.file, ARGS.quality, ARGS.verbose)
     elif ARGS.command == 'dedupe':
