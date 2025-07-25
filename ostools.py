@@ -276,6 +276,8 @@ def update(file, delay, container, verbose):
     for [name, value] in in_cur.execute('SELECT name, value FROM metadata'):
         if name == 'name':
             value = value[:-7]+container.replace('-','/')
+        if name == 'format':
+            value = 'png'
         out_cur.execute('INSERT INTO metadata VALUES (?, ?)', [name, value])
     out_cur.execute('''CREATE TABLE tiles (
         zoom_level integer,
