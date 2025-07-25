@@ -48,7 +48,7 @@ You should not need to install additional packages to `extract` or `dedupe`, but
 
 _You'll need a rooted android device to `extract`. If you don't have a rooted physical device then you can use the [emulator built into the Android Studio SDK](https://developer.android.com/studio/run/managing-avds) with a [system image that supports elevated privileges](https://developer.android.com/studio/run/managing-avds#system-image)._
 
-1. Within the OS Maps app, [download the maps](https://osmaps.com/os-maps-help?categoryId=631349&article=637593#article-id-637593) that you want to extract
+1. Within the OS Maps app, [download the maps](https://osmaps.com/help?categoryId=offlineMaps&itemId=69) that you want to extract
 1. From the `/data/data/uk.co.ordnancesurvey.osmaps/` directory on the rooted android device copy `files/.mapbox/map_data.db` and `databases/customOfflineMaps.db` to your computer. You can do this using ADB via your terminal:
 
     ```powershell
